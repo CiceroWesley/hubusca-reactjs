@@ -16,6 +16,7 @@ const Home = () => {
     const handleSearch = async () => {
         const response = await fetchUserData(username);
         if(response){
+            console.log(response)
             saveUser(username)
             setUser(response)
         }
@@ -23,6 +24,7 @@ const Home = () => {
 
     const saveUser = async (name : string) => {
         try {
+            
             const users = localStorage.getItem('users');
 
             if(users === null){

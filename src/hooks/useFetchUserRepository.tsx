@@ -23,7 +23,6 @@ const useFetchUserRepository = () => {
             } catch (errorC) {
                 setError(prevValue => [...prevValue, String(errorC)]);
                 setLoading(false);
-                return errorC;
             }
         }
     

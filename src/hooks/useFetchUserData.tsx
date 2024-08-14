@@ -28,7 +28,6 @@ const useFetchUserData = () => {
         } catch (errorC) {
             setError(prevValue => [...prevValue, 'Usuário não encontrado']);
             setLoading(false);
-            return 404;
         }
     }
     
