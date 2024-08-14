@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import instanceAxios from '../../utils/axios'
 import { user } from '../../types/types'
 import { Link } from 'react-router-dom'
+import User from '../../Components/User/User'
 
 type Props = {}
 
@@ -40,12 +41,7 @@ const Users = (props: Props) => {
   return (
     <div>
         {usersData && usersData.map((user) => (
-        <div key={user.login}>
-            {user.name}
-            <Link to={`/profile/${user.login}`}><img src={user.avatar_url} alt="" /></Link>
-            {user.login}
-            {user.location}
-        </div>
+            <User user={user} full={false}/>
         ))}
 
     </div>

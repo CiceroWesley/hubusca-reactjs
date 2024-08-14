@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import instanceAxios from '../../utils/axios';
 import { user } from '../../types/types';
 import { Link } from 'react-router-dom';
+import User from '../../Components/User/User';
 
 const Home = () => {
     const [username, setUsername] = useState<string>('');
@@ -66,11 +67,10 @@ const Home = () => {
             <input type="submit" value='Buscar' onClick={() => handleSearch()} />
         </div>
         {user && <div>
-            {user.name}
-            <Link to={`/profile/${user.login}`}><img src={user.avatar_url} alt="" /></Link>
-            {user.login}
-            {user.location}
+            <User user={user} full={false} />
         </div>}
+
+        
 
 
     </div>
