@@ -39,10 +39,10 @@ const Home = () => {
             let parsedUsers: string[] = JSON.parse(users);
             let newUsers : string[] = [];
             parsedUsers.forEach((element) => {
-            newUsers.push(element)
+                newUsers.push(element)
             })
             if(!newUsers.includes(name) && name !== ''){
-            newUsers.push(name)
+                newUsers.push(name)
             }
             localStorage.setItem('users', JSON.stringify(newUsers));
     
