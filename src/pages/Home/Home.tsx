@@ -1,36 +1,27 @@
 import React, { useState } from 'react'
-import instanceAxios from '../../utils/axios';
 import { user } from '../../types/types';
-import { Link } from 'react-router-dom';
+
 import User from '../../Components/User/User';
+import useFetchUserData from '../../hooks/useFetchUserData';
 
 const Home = () => {
     const [username, setUsername] = useState<string>('');
 
     const [user, setUser] = useState<user>();
 
+    const {loading, error, fetchUserData} = useFetchUserData();
 
     const handleSearch = async () => {
-        try {
-            const userData = username.trim();
-            const response = await instanceAxios(`users/${userData}`);
-            if(response){
-                setUser(response.data)
-                setUsername('');
-                saveUser(userData)
-            } else {
-                throw 'Erro ao buscar usuário'
-            }
-
-        } catch (error) {
-            console.log(error)
+        const response = await fetchUserData(username);
+        if(response){
+            saveUser(username)
+        setUser(response)
         }
     }
 
     const saveUser = async (name : string) => {
         try {
             const users = localStorage.getItem('users');
-            console.log(users)
 
             if(users === null){
                 // const nameArray = [name]
@@ -66,13 +57,11 @@ const Home = () => {
             </label>
             <input type="submit" value='Buscar' onClick={() => handleSearch()} />
         </div>
+        {loading && <span>Carregando</span>}
+        {error && <span>{error}</span>}
         {user && <div>
             <User user={user} full={false} />
         </div>}
-
-        
-
-
     </div>
   )
 }

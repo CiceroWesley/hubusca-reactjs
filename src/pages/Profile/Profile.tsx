@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { repository, user } from '../../types/types'
 import instanceAxios from '../../utils/axios'
 import User from '../../Components/User/User'
+import useFetchUserData from '../../hooks/useFetchUserData'
 
 type Props = {}
 
@@ -12,23 +13,13 @@ const Profile = (props: Props) => {
 
     const { username } = useParams();
 
-
+    const {loading, error, fetchUserData} = useFetchUserData();
 
     useEffect(() => {
         const handleSearch = async () => {
-            try {
-                let userData = username;
-                userData = userData?.trim();
-                const response = await instanceAxios(`users/${userData}`);
-                if(response){
-                    setUser(response.data)
-                    console.log(response.data)
-                } else {
-                    throw 'Erro ao buscar usuário'
-                }
-    
-            } catch (error) {
-                console.log(error)
+            const response = await fetchUserData(String(username))
+            if(response){
+                setUser(response)
             }
         }
         const handleRepository = async () => {
