@@ -3,6 +3,8 @@ import { user } from '../../types/types';
 
 import User from '../../Components/User/User';
 import useFetchUserData from '../../hooks/useFetchUserData';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     const [username, setUsername] = useState<string>('');
@@ -44,18 +46,26 @@ const Home = () => {
 
     }
 
+
+const ButtonSearch = styled.button`
+    background-color: dodgerblue;
+    color: white;
+    padding: 4px;
+    border: none;
+    border-radius: 15%;
+`
+
   return (
-    <div>
+    <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
         <div>
             <h3>Busque um usuário</h3>
+
+            <Link to='/users'>Veja os usuários buscados</Link>
         </div> 
 
         <div>
-            <label>
-                <span>Nome de usuário:</span>
-                <input type="text" placeholder='Insira o nome de usuário' value={username} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}/>
-            </label>
-            <input type="submit" value='Buscar' onClick={() => handleSearch()} />
+            <input type="text" placeholder='Insira o nome de usuário' value={username} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}/>
+            <ButtonSearch onClick={() => handleSearch()}>Buscar</ButtonSearch>
         </div>
         {loading && <span>Carregando</span>}
         {error && <span>{error[0]}</span>}

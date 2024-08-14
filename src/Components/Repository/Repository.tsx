@@ -13,10 +13,11 @@ type Props = {
 
 const CardWrapper = styled.div`
     border-radius: 10px;
-    height:  "423px";
+    height: 275px;
     width: 350px;
     box-shadow: 0px 12px 13px #808080ab;
     margin-top:10px;
+    overflow-y: auto;
 }
 `
 

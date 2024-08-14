@@ -5,6 +5,7 @@ import instanceAxios from '../../utils/axios'
 import User from '../../Components/User/User'
 import useFetchUserData from '../../hooks/useFetchUserData'
 import useFetchUserRepository from '../../hooks/useFetchUserRepository'
+import Repository from '../../Components/Repository/Repository'
 
 type Props = {}
 
@@ -36,14 +37,24 @@ const Profile = (props: Props) => {
     },[username])
     
   return (
-    <div>
+    <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
         {loadingUser || loadingRepository && <span>Carregando</span>}
         {errorUser || errorRepository && <span>{errorUser? errorUser : errorRepository}</span>}
 
         {user && repository && repository && <div>
-            <User user={user} repository={repository} full={true}/>
+            <div style={{margin: '5px 0 30px 0'}}>
+                <User user={user} full={true}/>
+            </div>
         </div>   
         }  
+        <div style={{display:'flex', flexWrap: 'wrap', justifyContent:'space-around'}}>
+            {repository && repository.map((repo) => (
+                <div style={{margin:'10px 0 15px 0'}}>
+                    <Repository repository={repo}/>
+                </div>
+            ))}
+        </div>
+        
     </div>
   )
 }

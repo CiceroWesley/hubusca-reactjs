@@ -3,10 +3,10 @@ import { repository, user } from '../../types/types'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Repository from '../Repository/Repository'
+import unavailable from '../../assets/unavailable.png'
 
 type Props = { 
     user: user,
-    repository?: repository[],
     full: boolean
 }
 
@@ -95,13 +95,13 @@ const User = (props: Props) => {
                 {props.full ? <Image src={props.user.avatar_url} alt="" /> : <Link to={`/profile/${props.user.login}`}><Image src={props.user.avatar_url} alt="" /></Link>}
             </ImageWrapper>
             <Name>
-                {props.user.name}
+                {props.user.name? props.user.name : <img src={unavailable} alt=''/>}
             </Name>
             <Login>
                 {props.user.login}
             </Login>
             <Location>
-                {props.user.location}
+                {props.user.location? props.user.location :  <img src={unavailable} alt=''/>}
             </Location>    
 
             {props.full && <>
@@ -122,13 +122,6 @@ const User = (props: Props) => {
             </>}
         </Card>
     </CardWrapper>
-    {props.full && props.repository &&
-        <div>
-            {props.repository && props.repository.map((repo) => (
-                <Repository repository={repo}/>
-            ))}
-        </div> 
-    }
     </>
   )
 }

@@ -37,11 +37,13 @@ const Users = (props: Props) => {
     }, [])
 
   return (
-    <div>
+    <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
         {loading && <span>Carregando</span>}
         {error && <span>{error[0]}</span>}
         {usersData && usersData.map((user) => (
-            <User key={user.login} user={user} full={false}/>
+            <div style={{margin: '5px 0 25px 0'}}>
+              <User key={user.login} user={user} full={false}/>
+            </div>
         ))}
 
     </div>
