@@ -6,6 +6,7 @@ import User from '../../Components/User/User'
 import useFetchUserData from '../../hooks/useFetchUserData'
 import useFetchUserRepository from '../../hooks/useFetchUserRepository'
 import Repository from '../../Components/Repository/Repository'
+import loadingGif from '../../assets/loading.gif'
 
 type Props = {}
 
@@ -38,10 +39,10 @@ const Profile = (props: Props) => {
     
   return (
     <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-        {loadingUser || loadingRepository && <span>Carregando</span>}
+        {loadingUser || loadingRepository && <img src={loadingGif} width='20%'></img>}
         {errorUser || errorRepository && <span>{errorUser? errorUser : errorRepository}</span>}
 
-        {user && repository && repository && <div>
+        {user && repository && <div>
             <div style={{margin: '5px 0 30px 0'}}>
                 <User user={user} full={true}/>
             </div>

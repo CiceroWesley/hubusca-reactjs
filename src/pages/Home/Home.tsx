@@ -5,6 +5,8 @@ import User from '../../Components/User/User';
 import useFetchUserData from '../../hooks/useFetchUserData';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import loadingGif from '../../assets/loading.gif'
+
 
 const Home = () => {
     const [username, setUsername] = useState<string>('');
@@ -69,7 +71,7 @@ const ButtonSearch = styled.button`
             <input type="text" placeholder='Insira o nome de usuário' value={username} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}/>
             <ButtonSearch onClick={() => handleSearch()}>Buscar</ButtonSearch>
         </div>
-        {loading && <span>Carregando</span>}
+        {loading && <img src={loadingGif} width='20%'></img>}
         {error && <span>{error[0]}</span>}
         {user && <>
             <User user={user} full={false} />

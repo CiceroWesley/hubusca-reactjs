@@ -4,6 +4,7 @@ import { user } from '../../types/types'
 import { Link } from 'react-router-dom'
 import User from '../../Components/User/User'
 import useFetchUserData from '../../hooks/useFetchUserData'
+import loadingGif from '../../assets/loading.gif'
 
 type Props = {}
 
@@ -38,7 +39,7 @@ const Users = (props: Props) => {
 
   return (
     <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-        {loading && <span>Carregando</span>}
+        {loading && <img src={loadingGif} width='20%'></img>}
         {error && <span>{error[0]}</span>}
         {usersData && usersData.map((user) => (
             <div style={{margin: '5px 0 25px 0'}}>
