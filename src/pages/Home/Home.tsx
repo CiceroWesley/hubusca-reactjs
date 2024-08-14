@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import instanceAxios from '../../utils/axios';
 import { user } from '../../types/types';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     const [username, setUsername] = useState<string>('');
@@ -15,6 +16,7 @@ const Home = () => {
             if(response){
                 setUser(response.data)
                 setUsername('');
+                saveUser(userData)
             } else {
                 throw 'Erro ao buscar usuário'
             }
@@ -22,6 +24,32 @@ const Home = () => {
         } catch (error) {
             console.log(error)
         }
+    }
+
+    const saveUser = async (name : string) => {
+        try {
+            const users = localStorage.getItem('users');
+            console.log(users)
+
+            if(users === null){
+                // const nameArray = [name]
+                localStorage.setItem('users', JSON.stringify([name]))
+                return;
+            }
+            let parsedUsers: string[] = JSON.parse(users);
+            let newUsers : string[] = [];
+            parsedUsers.forEach((element) => {
+            newUsers.push(element)
+            })
+            if(!newUsers.includes(name) && name !== ''){
+            newUsers.push(name)
+            }
+            localStorage.setItem('users', JSON.stringify(newUsers));
+    
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
   return (
@@ -39,7 +67,7 @@ const Home = () => {
         </div>
         {user && <div>
             {user.name}
-            <img src={user.avatar_url} alt="" />
+            <Link to={`/profile/${user.login}`}><img src={user.avatar_url} alt="" /></Link>
             {user.login}
             {user.location}
         </div>}
