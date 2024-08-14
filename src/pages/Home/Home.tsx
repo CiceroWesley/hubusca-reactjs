@@ -15,7 +15,7 @@ const Home = () => {
         const response = await fetchUserData(username);
         if(response){
             saveUser(username)
-        setUser(response)
+            setUser(response)
         }
     }
 
@@ -59,9 +59,9 @@ const Home = () => {
         </div>
         {loading && <span>Carregando</span>}
         {error && <span>{error[0]}</span>}
-        {user && <div>
+        {user && <>
             <User user={user} full={false} />
-        </div>}
+        </>}
     </div>
   )
 }

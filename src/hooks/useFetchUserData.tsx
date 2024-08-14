@@ -9,6 +9,7 @@ const useFetchUserData = () => {
     const [error, setError] = useState<string[]>([]);
 
     const fetchUserData = async (username : string) =>{
+        setError([]);
         if(username === "undefined"){
             setError(prevValue => [...prevValue, 'Insira o nome de usuário']);
             return;

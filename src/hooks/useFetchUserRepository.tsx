@@ -6,6 +6,7 @@ const useFetchUserRepository = () => {
     const [error, setError] = useState<string[]>([]);
 
         const getRepositories = async (username : string) => {
+            setError([]);
             if(username === "undefined"){
                 setError(prevValue => [...prevValue, 'Insira o nome de usuário']);
                 return;
