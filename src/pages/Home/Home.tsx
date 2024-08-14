@@ -58,7 +58,7 @@ const Home = () => {
             <input type="submit" value='Buscar' onClick={() => handleSearch()} />
         </div>
         {loading && <span>Carregando</span>}
-        {error && <span>{error}</span>}
+        {error && <span>{error[0]}</span>}
         {user && <div>
             <User user={user} full={false} />
         </div>}

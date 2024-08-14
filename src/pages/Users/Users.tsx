@@ -39,7 +39,7 @@ const Users = (props: Props) => {
   return (
     <div>
         {loading && <span>Carregando</span>}
-        {error && <span>{error}</span>}
+        {error && <span>{error[0]}</span>}
         {usersData && usersData.map((user) => (
             <User key={user.login} user={user} full={false}/>
         ))}

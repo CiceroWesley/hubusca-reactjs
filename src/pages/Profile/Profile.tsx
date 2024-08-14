@@ -4,16 +4,18 @@ import { repository, user } from '../../types/types'
 import instanceAxios from '../../utils/axios'
 import User from '../../Components/User/User'
 import useFetchUserData from '../../hooks/useFetchUserData'
+import useFetchUserRepository from '../../hooks/useFetchUserRepository'
 
 type Props = {}
 
 const Profile = (props: Props) => {
     const [user, setUser] = useState<user>();
-    const [repository, setRepository] = useState<repository[]>([]);
+    const [repository, setRepository] = useState<repository[]>();
 
     const { username } = useParams();
 
-    const {loading, error, fetchUserData} = useFetchUserData();
+    const {loading: loadingUser, error: errorUser, fetchUserData} = useFetchUserData();
+    const {loading: loadingRepository, error: errorRepository, getRepositories} = useFetchUserRepository();
 
     useEffect(() => {
         const handleSearch = async () => {
@@ -23,18 +25,11 @@ const Profile = (props: Props) => {
             }
         }
         const handleRepository = async () => {
-            try {
-                const response = await instanceAxios.get(`users/${username?.trim()}/repos`);
-                if(response){
-                    setRepository(response.data)
-                }
-
-            } catch (error) {
-                console.log(error)
+            const response = await getRepositories(String(username))
+            if(response){
+                setRepository(response)
             }
-
         }
-
 
      handleSearch();
      handleRepository();
@@ -42,7 +37,10 @@ const Profile = (props: Props) => {
     
   return (
     <div>
-        {user && repository && <div>
+        {loadingUser || loadingRepository && <span>Carregando</span>}
+        {errorUser || errorRepository && <span>{errorUser? errorUser : errorRepository}</span>}
+
+        {user && repository && repository && <div>
             <User user={user} repository={repository} full={true}/>
         </div>   
         }  
