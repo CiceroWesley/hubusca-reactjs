@@ -2,6 +2,7 @@
 import { repository, user } from '../../types/types'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import Repository from '../Repository/Repository'
 
 type Props = { 
     user: user,
@@ -86,6 +87,7 @@ const Card = styled.div`
 
 const User = (props: Props) => {
   return (
+    <>
     <CardWrapper $sizeFull={props.full}>
         <BackgroundBar></BackgroundBar>    
         <Card>
@@ -119,28 +121,15 @@ const User = (props: Props) => {
                 </MoreInfo>
             </>}
         </Card>
-
-        {props.full && props.repository &&
-            <>
-                <div>
-                {props.repository && props.repository.map((repo) => (
-                    <a href={repo.html_url} target='_blank'>
-                        <span>{repo.name}</span>
-                        <span>{repo.language}</span>
-                        <span>{repo.description}</span>
-                        <span>{repo.created_at}</span>
-                        <span>{repo.pushed_at}</span>
-                    </a>
-                ))}
-                    
-                </div>
-            </>
-            
-        }
-
     </CardWrapper>
-
-
+    {props.full && props.repository &&
+        <div>
+            {props.repository && props.repository.map((repo) => (
+                <Repository repository={repo}/>
+            ))}
+        </div> 
+    }
+    </>
   )
 }
 
