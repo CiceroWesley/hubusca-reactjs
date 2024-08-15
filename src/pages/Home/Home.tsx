@@ -4,7 +4,6 @@ import { user } from '../../types/types';
 import User from '../../Components/User/User';
 import useFetchUserData from '../../hooks/useFetchUserData';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import loadingGif from '../../assets/loading.gif'
 
 
@@ -18,7 +17,6 @@ const Home = () => {
     const handleSearch = async () => {
         const response = await fetchUserData(username);
         if(response){
-            console.log(response)
             saveUser(username)
             setUser(response)
         }
@@ -60,15 +58,13 @@ const ButtonSearch = styled.button`
 `
 
   return (
-    <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+    <main style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
         <div>
             <h3>Busque um usuário</h3>
-
-            <Link to='/users'>Veja os usuários buscados</Link>
         </div> 
 
         <div>
-            <input type="text" placeholder='Insira o nome de usuário' value={username} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}/>
+            <input style={{marginRight:'8px'}} type="text" placeholder='Insira o nome de usuário' value={username} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}/>
             <ButtonSearch onClick={() => handleSearch()}>Buscar</ButtonSearch>
         </div>
         {loading && <img src={loadingGif} width='20%'></img>}
@@ -76,7 +72,7 @@ const ButtonSearch = styled.button`
         {user && <>
             <User user={user} full={false} />
         </>}
-    </div>
+    </main>
   )
 }
 

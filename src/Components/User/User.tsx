@@ -1,8 +1,7 @@
 
-import { repository, user } from '../../types/types'
+import { user } from '../../types/types'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import Repository from '../Repository/Repository'
 import unavailable from '../../assets/unavailable.png'
 
 type Props = { 

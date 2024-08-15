@@ -1,4 +1,3 @@
-import React from 'react'
 import { repository } from '../../types/types'
 import styled from 'styled-components'
 

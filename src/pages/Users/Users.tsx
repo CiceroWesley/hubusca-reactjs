@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import instanceAxios from '../../utils/axios'
+import { useEffect, useState } from 'react'
 import { user } from '../../types/types'
-import { Link } from 'react-router-dom'
 import User from '../../Components/User/User'
 import useFetchUserData from '../../hooks/useFetchUserData'
 import loadingGif from '../../assets/loading.gif'
 
-type Props = {}
 
-const Users = (props: Props) => {
+const Users = () => {
     const [usersData, setUsersData] = useState<user[]>();
 
     const {loading, error, fetchUserData} = useFetchUserData();
@@ -38,7 +35,8 @@ const Users = (props: Props) => {
     }, [])
 
   return (
-    <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+    <main style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+        <h3>Usuários já pesquisados</h3>
         {loading && <img src={loadingGif} width='20%'></img>}
         {error && <span>{error[0]}</span>}
         {usersData && usersData.map((user) => (
@@ -46,8 +44,7 @@ const Users = (props: Props) => {
               <User key={user.login} user={user} full={false}/>
             </div>
         ))}
-
-    </div>
+    </main>
   )
 }
 

@@ -1,10 +1,8 @@
 import { useState } from "react";
 import instanceAxios from "../utils/axios";
-import { user } from "../types/types";
 
 
 const useFetchUserData = () => {
-    const [userData, setUserData] = useState<user>();
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string[]>([]);
 

@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { repository, user } from '../../types/types'
-import instanceAxios from '../../utils/axios'
 import User from '../../Components/User/User'
 import useFetchUserData from '../../hooks/useFetchUserData'
 import useFetchUserRepository from '../../hooks/useFetchUserRepository'
 import Repository from '../../Components/Repository/Repository'
 import loadingGif from '../../assets/loading.gif'
 
-type Props = {}
-
-const Profile = (props: Props) => {
+const Profile = () => {
     const [user, setUser] = useState<user>();
     const [repository, setRepository] = useState<repository[]>();
 
@@ -38,7 +35,7 @@ const Profile = (props: Props) => {
     },[username])
     
   return (
-    <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+    <main style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
         {loadingUser || loadingRepository && <img src={loadingGif} width='20%'></img>}
         {errorUser || errorRepository && <span>{errorUser? errorUser : errorRepository}</span>}
 
@@ -55,8 +52,7 @@ const Profile = (props: Props) => {
                 </div>
             ))}
         </div>
-        
-    </div>
+    </main>
   )
 }
 
