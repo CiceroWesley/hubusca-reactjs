@@ -19,6 +19,10 @@ const NavButton = styled.li`
     padding: 4px;
     border: none;
     border-radius: 15%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
 `
 const HeaderDetails = styled.header`
     border: 0.5px solid black;
@@ -35,8 +39,8 @@ const Navbar = () => {
             </div>
             <div>
                 <OptionsNav>
-                    <NavButton><NavLink  style={{textDecoration:'none', color:'white'}} to={'/'}>Buscar usuários</NavLink></NavButton>
-                    <NavButton><NavLink style={{textDecoration:'none', color:'white'}} to={'/users'}>Ver  usuários buscados</NavLink></NavButton>
+                    <NavButton><NavLink  style={{textDecoration:'none', color:'white', textAlign:'center'}} to={'/'}>Buscar</NavLink></NavButton>
+                    <NavButton><NavLink style={{textDecoration:'none', color:'white', textAlign:'center'}} to={'/users'}>Usuários buscados</NavLink></NavButton>
                 </OptionsNav>
             </div>
         </NavbarWrapper>

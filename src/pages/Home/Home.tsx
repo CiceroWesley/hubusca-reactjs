@@ -60,10 +60,10 @@ const ButtonSearch = styled.button`
   return (
     <main style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
         <div>
-            <h3>Busque um usuário</h3>
+            <h3>Busque um usuário do GitHub</h3>
         </div> 
 
-        <div>
+        <div style={{marginBottom:'25px'}}>
             <input style={{marginRight:'8px'}} type="text" placeholder='Insira o nome de usuário' value={username} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}/>
             <ButtonSearch onClick={() => handleSearch()}>Buscar</ButtonSearch>
         </div>
